@@ -9,7 +9,7 @@ import path from "path";
 dotenv.config(); 
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors({
     origin: "*", // Allow all origins (or specify your extension URL)
