@@ -36,7 +36,7 @@ app.get('/analyze/:videoid', async (req,res) => {
         const response = await youtube.commentThreads.list({
             part: 'snippet',
             videoId: videoId,
-            maxResults: 100,
+            maxResults: 1000,
             order: 'relevance',
             auth: process.env.YOUTUBE_API_KEY
 
