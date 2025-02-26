@@ -3,21 +3,30 @@ import express, { text } from "express";
 import { google } from "googleapis";
 import util from "./util.js";
 import sendRequest from "./ai-service.js";
+import cors from "cors";
+import path from "path";
 
 dotenv.config(); 
 
 const app = express();
 const PORT = 3000;
 
-//cors
-app.use((req,res,next) => {
-    res.header('Access-Control-Allow-Origin','*');
-    res.header('Access-Control-Allow-Methods','GET');
-    next();
-})
+app.use(cors({
+    origin: "*", // Allow all origins (or specify your extension URL)
+    methods: ["GET"],
+}));
+
+// //cors
+// app.use((req,res,next) => {
+//     res.header('Access-Control-Allow-Origin','*');
+//     res.header('Access-Control-Allow-Methods','GET');
+//     next();
+// })
+
+app.use(express.static("public"));
 
 app.get('/', (req,res) => {
-    res.json('ok');
+    res.sendFile(path.join(process.cwd(), "public", "body.png"));
 })
 app.get('/analyze/:videoid', async (req,res) => {
     const videoId = req.params.videoid;
